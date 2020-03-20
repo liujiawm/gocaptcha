@@ -1,6 +1,7 @@
 package gocaptcha
 
 import (
+	"bytes"
 	"image"
 	"image/color"
 	"image/draw"
@@ -103,6 +104,19 @@ func New(options *Options) (*Data, error) {
 // WriteImage 输出图片
 func (data *Data) WriteImage(w io.Writer) error {
 	return png.Encode(w, data.img)
+}
+
+func (data *Data) BinaryEncoding() []byte {
+	var buf bytes.Buffer
+	if err := png.Encode(&buf, data.img); err != nil {
+		panic(err.Error())
+	}
+	return buf.Bytes()
+}
+
+func (data *Data) WriteTo(w io.Writer) (int64, error) {
+	n, err := w.Write(data.BinaryEncoding())
+	return int64(n), err
 }
 
 // randText 随机取opts.Length位字作为验证码
