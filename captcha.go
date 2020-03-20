@@ -2,6 +2,8 @@ package gocaptcha
 
 import (
 	"bytes"
+	"encoding/base64"
+	"fmt"
 	"image"
 	"image/color"
 	"image/draw"
@@ -117,6 +119,10 @@ func (data *Data) BinaryEncoding() []byte {
 func (data *Data) WriteTo(w io.Writer) (int64, error) {
 	n, err := w.Write(data.BinaryEncoding())
 	return int64(n), err
+}
+
+func (data *Data) EncodeB64string() string {
+	return fmt.Sprintf("data:%s;base64,%s", "image/png", base64.StdEncoding.EncodeToString(data.BinaryEncoding()))
 }
 
 // randText 随机取opts.Length位字作为验证码
