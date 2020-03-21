@@ -245,8 +245,6 @@ func randFontFamily() (*truetype.Font, error) {
 
 	fontFile := path.Join("fonts", fontFiles[r.Intn(len(fontFiles))])
 
-	fmt.Println(fontFile)
-
 	// fontBytes, err := ioutil.ReadFile(fontFile)
 	fontBytes, err := Asset(fontFile)
 	if err != nil {
@@ -285,7 +283,7 @@ func drawText(text string, img *image.NRGBA, opts *Options) error {
 		ctx.SetSrc(image.NewUniform(randMainColor(opts)))
 		x := fontSpacing*idx + fontOffset
 		// y := opts.Height/5 + r.Intn(opts.Height/3) + int(math.Floor(fontSize/2))
-		y := int(-fontSize/6)+ctx.PointToFixed(fontSize).Ceil()
+		y := int(-fontSize/6) + ctx.PointToFixed(fontSize).Ceil()
 		pt := freetype.Pt(x, y)
 		if _, err := ctx.DrawString(string(char), pt); err != nil {
 			return err
