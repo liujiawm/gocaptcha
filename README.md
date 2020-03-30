@@ -8,7 +8,7 @@
 ## panic "integer divide by zero"
  如果在github.com/golang/freetype/truetype/hint.go的函数mulDiv出除数不能为0的panic是因为字体造成,请换其他字体
 
-## 效果
+## 示例
 
 ```
 	data,_ := gocaptcha.New(&gocaptcha.Options{
