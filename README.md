@@ -11,7 +11,7 @@
 ## 效果
 
 ```
-data,_ := gocaptcha.New(&gocaptcha.Options{
+	data,_ := gocaptcha.New(&gocaptcha.Options{
 		CharPreset:"0123456789", // 数字作基数
 		Curve:2,                 // 两条弧线
 		Length:4,                // 长度为4的验证码
@@ -19,7 +19,7 @@ data,_ := gocaptcha.New(&gocaptcha.Options{
 		Height:33,               // 图片高
 	})
 
-	// TODO 将data.Text写入Session保存用于验证
+	// TODO 将data.Text保存用于验证
 
 	// 图片显示data.Text,也可用data.EncodeB64string()返回base64
 	// c为gin的*gin.Context,也可以用其他的io.Writer
